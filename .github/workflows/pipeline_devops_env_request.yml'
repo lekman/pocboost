@@ -1,0 +1,37 @@
+name: Request - Environment - DevOps Sandbox
+
+# Requests an environment to be provisioned for DevOps engineers
+# For info see https://github.com/RDIT-DPS/devops-platform-documentation/blob/feature-docs-security-lifecycle-management/docs/design/ondemand-environment-devops-engineer.md
+
+on:
+    workflow_dispatch: # on demand
+        inputs:
+            owner:
+                description: 'Email address of the environment owner'
+                required: true
+                type: string
+            version:
+                description: 'Choose application and environment version'
+                required: true
+                type: choice
+                options: 
+                - 'Boost 1.1'
+                - 'Boost 1.2'
+                default: 'Boost 1.2'
+
+
+env:
+    ROOT_DIR: './adapters/bicep-modules'
+
+jobs:
+    params:
+        name: 'Set parameters'
+        runs-on: ubuntu-latest
+        outputs:
+            hub: ${{ steps.set-variable.outputs.hub }}
+        steps:
+          - name: Check params
+            shell: bash
+            id: set-variable
+            run: |
+                echo 'HELLO'
