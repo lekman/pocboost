@@ -46,9 +46,29 @@ jobs:
             shell: bash
             id: set-variable
             run: |
-                echo 'HELLO'
+                echo 'Settingand validating parameters'
+
+            # TODO: verify email, should be a valid email address using Regecx and possibly only be within AZ org.
+            # Also, does this need to be a specific set of users?
+            
+    provision:        
+        name: 'Set parameters'
+        runs-on: ubuntu-latest
+        outputs:
+            repourl: ${{ steps.terraform.outputs.url }}
+            reponame: ${{ steps.terraform.outputs.name }}
+        steps:
+          - name: Send Terraform payload
+            shell: bash
+            id: terraform
+            run: |
+                echo 'Sending payload...'
+
+            # TODO: Based on input above, add correct payload and call the Terraform API
+
     # email:
     #     name: Send mail
+    #     needs: [ params, provision]
     #     uses: dawidd6/action-send-mail@v3
     #     with:
     #         # Specify connection via URL (replaces server_address, server_port, secure,
