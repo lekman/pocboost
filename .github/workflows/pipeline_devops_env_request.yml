@@ -52,7 +52,7 @@ jobs:
             # Also, does this need to be a specific set of users?
             
     provision:        
-        name: 'Set parameters'
+        name: 'Provision using Terraf'
         runs-on: ubuntu-latest
         outputs:
             repourl: ${{ steps.terraform.outputs.url }}
